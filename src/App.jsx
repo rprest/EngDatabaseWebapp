@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 function App() {
@@ -20,6 +20,12 @@ function App() {
     setNeedToReview(data.checkbox_properties["Need to Review"]);
   };
 
+  useEffect(() => {
+    fetchRecentPage();
+    const interval = setInterval(fetchRecentPage, 5000);
+    return () => clearInterval(interval);
+  }, [])
+
   return (
     <div className={sidebarState ? "flex h-screen" : "flex h-screen"}>
       <div className={sidebarState ? "flex-1 p-4 flex items-start justify-center" : "w-md mx-auto p-4"}>
@@ -30,7 +36,7 @@ function App() {
             onClick={() => setSidebarState(!sidebarState)}
             className="w-full mb-3 py-1 border-white text-white border-2 rounded-xl px-2 hover:shadow-md/40 shadow-white hover:ring-1 hover:cursor-pointer"
             >
-              {sidebarState ? 'Close Sidebar' : 'Open Sidebar'}
+              {sidebarState ? 'Close Sideview' : 'Open Sideview'}
             </button>
 
           <a href={pageURL} className="block px-5 border-white text-white border-2 rounded-xl p-3 hover:shadow-lg/40 shadow-white hover:ring-1 text-left hover:cursor-pointer no-underline">
@@ -46,12 +52,12 @@ function App() {
       </div>
 
       <div 
-        className={`bg-cyan-950 p-4 border-l border-white transition-all duration-300 ease-in-out ${
+        className={`bg-[#191919] p-4 border-l border-white transition-all duration-300 ease-in-out ${
           sidebarState ? 'w-1/2' : 'w-0 p-0 border-0 overflow-hidden'
         }`}
       >
-        <div className={`${sidebarState ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}>
-          <iframe src={`https://working-ethernet-639.notion.site/ebd/${pageIDclean}`} frameborder="0" allowfullscreen  />
+        <div className={`${sidebarState ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300 h-full`}>
+          <iframe src={`https://working-ethernet-639.notion.site/ebd/${pageIDclean}`} frameborder="0" className="w-full h-full"  />
         </div>
       </div>
 
