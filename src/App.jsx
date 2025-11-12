@@ -12,7 +12,7 @@ function App() {
   const [NeedToReview, setNeedToReview] = useState(false);
 
   const fetchRecentPage = async () => {
-    const response = await fetch('http://localhost:5000/api/recentpage');
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/recentpage`);
     const data = await response.json();
     setMessage(data.most_recent_title);
     setPageID(data.page_id);
