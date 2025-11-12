@@ -9,8 +9,10 @@ page_id = ""
 
 app = Flask(__name__)
 
-CORS(app)
-
+CORS(app, origins=[
+    "http://localhost:5173",  # Local development
+    "https://rprest.github.io"  # Production
+])
 
 @app.route("/api/recentpage")
 def recentpage():
