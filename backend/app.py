@@ -4,8 +4,15 @@ from notion_client import Client
 import requests
 import os
 
+# from dotenv import load_dotenv
+
+# load_dotenv()
+
 NOTION_API_KEY = os.environ.get("NOTION_API_KEY")
 DATASOURCE_ID = os.environ.get("DATASOURCE_ID")
+
+# print(NOTION_API_KEY)
+# print(DATASOURCE_ID)
 
 app = Flask(__name__)
 
