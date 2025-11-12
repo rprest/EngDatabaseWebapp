@@ -21,9 +21,9 @@ function App() {
   };
 
   return (
-    <div className={sidebarState ? "flex h-screen" : ""}>
-      <div className={sidebarState ? "flex-1 p-4 flex items-start justify-center" : "max-w-lg mx-auto p-4"}>
-        <div className="max-w-lg w-full pt-5">
+    <div className={sidebarState ? "flex h-screen" : "flex h-screen"}>
+      <div className={sidebarState ? "flex-1 p-4 flex items-start justify-center" : "w-md mx-auto p-4"}>
+        <div className="w-md pt-5">
           <button onClick={fetchRecentPage} className="w-full mb-3 py-1 border-white text-white border-2 rounded-xl px-2 hover:shadow-md/40 shadow-white hover:ring-1 hover:cursor-pointer">Refresh</button>
 
           <button
@@ -51,15 +51,9 @@ function App() {
         }`}
       >
         <div className={`${sidebarState ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}>
-          {/* Sidebar content */}
+          <iframe src={`https://working-ethernet-639.notion.site/ebd/${pageIDclean}`} frameborder="0" allowfullscreen  />
         </div>
       </div>
-
-      {/* {sidebarState && (
-        <div className="w-1/2 bg-cyan-950 p-4 border-l border-white">
-
-        </div>
-      )} */}
 
     </div>
   )
