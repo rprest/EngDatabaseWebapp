@@ -30,7 +30,7 @@ function App() {
         <h1 className="text-5xl font-bold">{message}</h1>
         <p className="py-2">{pageID}</p>
         <div className={`${NeedToReview ? 'bg-red-900' : 'bg-green-900'} rounded inline-block`}>      
-          <p className="text-white px-2">{NeedToReview ? 'Needs Review' : 'No Need For Review'}</p>
+          <p className="text-white px-4">{NeedToReview ? 'Needs Review' : 'No Need For Review'}</p>
         </div>
         
       </a>
