@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
@@ -10,6 +8,7 @@ function App() {
   const [pageURL, setPageURL] = useState('');
   const [pageIDclean, setPageID_clean] = useState('');
   const [NeedToReview, setNeedToReview] = useState(false);
+  const [sidebarState, setSidebarState] = useState(false);
 
   const fetchRecentPage = async () => {
     const response = await fetch(`${import.meta.env.VITE_API_URL}/api/recentpage`);
@@ -22,19 +21,22 @@ function App() {
   };
 
   return (
-    <>
-      <button onClick={fetchRecentPage} className="w-full mb-3 py-1 border-white text-white border-2 rounded-xl px-2 hover:shadow-md/40 shadow-white hover:ring-1 hover:cursor-pointer">Refresh</button>
+    <div className="flex h-screen">
+      <div className="flex-1 p-4">
 
-      <a href={pageURL} className="block px-5 border-white text-white border-2 rounded-xl p-3 hover:shadow-lg/40 shadow-white hover:ring-1 text-left hover:cursor-pointer no-underline">
-        
-        <h1 className="text-5xl font-bold">{message}</h1>
-        <p className="py-2">{pageID}</p>
-        <div className={`${NeedToReview ? 'bg-red-900' : 'bg-green-900'} rounded inline-block`}>      
-          <p className="text-white px-4">{NeedToReview ? 'Needs Review' : 'No Need For Review'}</p>
-        </div>
-        
-      </a>
-    </>
+        <button onClick={fetchRecentPage} className="w-full mb-3 py-1 border-white text-white border-2 rounded-xl px-2 hover:shadow-md/40 shadow-white hover:ring-1 hover:cursor-pointer">Refresh</button>
+
+        <a href={pageURL} className="block px-5 border-white text-white border-2 rounded-xl p-3 hover:shadow-lg/40 shadow-white hover:ring-1 text-left hover:cursor-pointer no-underline">
+          
+          <h1 className="text-5xl font-bold">{message}</h1>
+          <p className="py-2">{pageID}</p>
+          <div className={`${NeedToReview ? 'bg-red-900' : 'bg-green-900'} rounded inline-block`}>      
+            <p className="text-white px-4">{NeedToReview ? 'Needs Review' : 'No Need For Review'}</p>
+          </div>
+          
+        </a>
+      </div>
+    </div>
   )
 }
 
