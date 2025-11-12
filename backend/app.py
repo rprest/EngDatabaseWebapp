@@ -18,11 +18,19 @@ app = Flask(__name__)
 
 CORS(
     app,
-    origins=[
-        "http://localhost:5173",  # Local development
-        "https://rprest.github.io",  # Production
-    ],
+    resources={
+        r"/api/*": {
+            "origins": ["http://localhost:5173", "https://rprest.github.io"],
+            "methods": ["GET", "POST", "OPTIONS"],
+            "allow_headers": ["Content-Type"],
+        }
+    },
 )
+
+
+@app.route("/")
+def health():
+    return jsonify({"status": "healthy"})
 
 
 @app.route("/api/recentpage")
