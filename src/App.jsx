@@ -30,16 +30,16 @@ function App() {
     <div className={sidebarState ? "flex h-screen" : "flex h-screen"}>
       <div className={sidebarState ? "flex-1 p-4 flex items-start justify-center" : "w-md mx-auto p-4"}>
         <div className="w-md pt-5">
-          <button onClick={fetchRecentPage} className="w-full mb-3 py-1 border-white text-white border-2 rounded-xl px-2 hover:shadow-md/40 shadow-white hover:ring-1 hover:cursor-pointer">Refresh</button>
+          <button onClick={fetchRecentPage} className="w-full mb-3 py-1 bg-neutral-700 text-white rounded-xl px-2 hover:shadow-md/40 shadow-black hover:cursor-pointer">Refresh</button>
 
           <button
             onClick={() => setSidebarState(!sidebarState)}
-            className="w-full mb-3 py-1 border-white text-white border-2 rounded-xl px-2 hover:shadow-md/40 shadow-white hover:ring-1 hover:cursor-pointer"
+            className="w-full mb-3 py-1 bg-neutral-700 text-white rounded-xl px-2 hover:shadow-md/40 shadow-black hover:cursor-pointer"
             >
               {sidebarState ? 'Close Sideview' : 'Open Sideview'}
             </button>
 
-          <a href={pageURL} className="block px-5 border-white text-white border-2 rounded-xl p-3 hover:shadow-lg/40 shadow-white hover:ring-1 text-left hover:cursor-pointer no-underline">
+          <a href={pageURL} className="block px-5 bg-neutral-700 text-white rounded-xl p-3 hover:shadow-lg/40 shadow-black text-left hover:cursor-pointer no-underline">
             
             <h1 className="text-5xl font-bold">{message}</h1>
             <p className="py-2">{pageID}</p>
@@ -52,12 +52,12 @@ function App() {
       </div>
 
       <div 
-        className={`bg-[#191919] p-4 border-l border-white transition-all duration-300 ease-in-out ${
+        className={`bg-[#191919] p-4 border-l-4 border-neutral-300 shadow-xl/70 transition-all duration-300 ease-in-out ${
           sidebarState ? 'w-1/2' : 'w-0 p-0 border-0 overflow-hidden'
         }`}
       >
         <div className={`${sidebarState ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300 h-full`}>
-          <iframe src={`https://working-ethernet-639.notion.site/ebd/${pageIDclean}`} frameborder="0" className="w-full h-full"  />
+          <iframe src={`https://working-ethernet-639.notion.site/ebd/${pageIDclean}`} frameborder="0" loading="lazy" className="w-full h-full"  />
         </div>
       </div>
 
