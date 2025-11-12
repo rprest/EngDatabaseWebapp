@@ -30,16 +30,16 @@ function App() {
     <div className={sidebarState ? "flex h-screen" : "flex h-screen"}>
       <div className={sidebarState ? "flex-1 p-4 flex items-start justify-center" : "w-md mx-auto p-4"}>
         <div className="w-md pt-5">
-          <button onClick={fetchRecentPage} className="w-full mb-3 py-1 bg-neutral-700 text-white rounded-xl px-2 hover:shadow-md/40 shadow-black hover:cursor-pointer">Refresh</button>
+          <button onClick={fetchRecentPage} className="w-full mb-3 py-1 bg-[#663a18] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#663a18] hover:cursor-pointer">Refresh</button>
 
           <button
             onClick={() => setSidebarState(!sidebarState)}
-            className="w-full mb-3 py-1 bg-neutral-700 text-white rounded-xl px-2 hover:shadow-md/40 shadow-black hover:cursor-pointer"
+            className="w-full mb-3 py-1 bg-[#663a18] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#663a18] hover:cursor-pointer"
             >
               {sidebarState ? 'Close Sideview' : 'Open Sideview'}
             </button>
 
-          <a href={pageURL} className="block px-5 bg-neutral-700 text-white rounded-xl p-3 hover:shadow-lg/40 shadow-black text-left hover:cursor-pointer no-underline">
+          <a href={pageURL} className="block px-5 bg-[#69625c] text-white rounded-xl p-3 hover:shadow-lg/40 shadow-[#69625c] text-left hover:cursor-pointer no-underline">
             
             <h1 className="text-5xl font-bold">{message}</h1>
             <p className="py-2">{pageID}</p>
@@ -52,7 +52,7 @@ function App() {
       </div>
 
       <div 
-        className={`bg-[#191919] p-4 border-l-4 border-neutral-300 shadow-xl/70 transition-all duration-300 ease-in-out ${
+        className={`bg-[#191919] p-4 border-l-4 border-neutral-300 shadow-xl/70 shadow-white transition-all duration-300 ease-in-out ${
           sidebarState ? 'w-1/2' : 'w-0 p-0 border-0 overflow-hidden'
         }`}
       >

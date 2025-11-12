@@ -70,7 +70,7 @@ def recentpage():
         page_id = page["id"]
 
         page_id_clean = page_id.replace("-", "")
-        page_url = f"notion://notion.so/{page_id_clean}"
+        page_url = f"https://notion.so/{page_id_clean}"
 
         print(checkbox_properties)
 
