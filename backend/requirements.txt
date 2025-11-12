@@ -10,7 +10,7 @@ gunicorn==21.2.0
 web: gunicorn app:app
 ```
 
-**`.env.example`** (don't commit actual keys):
-```
-NOTION_API_KEY=your_key_here
-DATASOURCE_ID=your_datasource_id_here
+# **`.env.example`** (don't commit actual keys):
+# ```
+# NOTION_API_KEY=your_key_here
+# DATASOURCE_ID=your_datasource_id_here

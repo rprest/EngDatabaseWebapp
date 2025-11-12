@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from notion_client import Client
 import requests
+import gunicorn
 
 NOTION_API_KEY = "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"
 DATASOURCE_ID = "0c93df58-d43c-48d8-860a-9680898e47ca"
@@ -9,10 +10,14 @@ page_id = ""
 
 app = Flask(__name__)
 
-CORS(app, origins=[
-    "http://localhost:5173",  # Local development
-    "https://rprest.github.io"  # Production
-])
+CORS(
+    app,
+    origins=[
+        "http://localhost:5173",  # Local development
+        "https://rprest.github.io",  # Production
+    ],
+)
+
 
 @app.route("/api/recentpage")
 def recentpage():
