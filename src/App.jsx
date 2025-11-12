@@ -30,16 +30,16 @@ function App() {
     <div className={sidebarState ? "flex h-screen" : "flex h-screen"}>
       <div className={sidebarState ? "flex-1 p-4 flex items-start justify-center" : "w-md mx-auto p-4"}>
         <div className="w-md pt-5">
-          <button onClick={fetchRecentPage} className="w-full mb-3 py-1 bg-[#663a18] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#663a18] hover:cursor-pointer">Refresh</button>
+          <button onClick={fetchRecentPage} className="w-full mb-3 py-1 bg-[#53361F] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#53361F] hover:cursor-pointer">Refresh</button>
 
           <button
             onClick={() => setSidebarState(!sidebarState)}
-            className="w-full mb-3 py-1 bg-[#663a18] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#663a18] hover:cursor-pointer"
+            className="w-full mb-3 py-1 bg-[#53361F] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#53361F] hover:cursor-pointer"
             >
               {sidebarState ? 'Close Sideview' : 'Open Sideview'}
             </button>
 
-          <a href={pageURL} className="block px-5 bg-[#69625c] text-white rounded-xl p-3 hover:shadow-lg/40 shadow-[#69625c] text-left hover:cursor-pointer no-underline">
+          <a href={pageURL} target="_blank" className="block px-5 bg-[#69625c] text-white rounded-xl p-3 hover:shadow-lg/40 shadow-[#69625c] text-left hover:cursor-pointer no-underline">
             
             <h1 className="text-5xl font-bold">{message}</h1>
             <p className="py-2">{pageID}</p>
