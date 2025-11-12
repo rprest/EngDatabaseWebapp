@@ -26,6 +26,13 @@ function App() {
 
         <button onClick={fetchRecentPage} className="w-full mb-3 py-1 border-white text-white border-2 rounded-xl px-2 hover:shadow-md/40 shadow-white hover:ring-1 hover:cursor-pointer">Refresh</button>
 
+        <button
+          onClick={() => setSidebarState(!sidebarState)}
+          className="w-full mb-3 py-1 border-white text-white border-2 rounded-xl px-2 hover:shadow-md/40 shadow-white hover:ring-1 hover:cursor-pointer"
+          >
+            {sidebarState ? 'Close Sidebar' : 'Open Sidebar'}
+          </button>
+
         <a href={pageURL} className="block px-5 border-white text-white border-2 rounded-xl p-3 hover:shadow-lg/40 shadow-white hover:ring-1 text-left hover:cursor-pointer no-underline">
           
           <h1 className="text-5xl font-bold">{message}</h1>
@@ -36,6 +43,13 @@ function App() {
           
         </a>
       </div>
+
+      {sidebarState && (
+        <div className="w-1/2 bg-cyan-950 p-4 border-l border-white">
+
+        </div>
+      )}
+
     </div>
   )
 }
