@@ -54,7 +54,7 @@ function App() {
     <div className={sidebarState ? "flex h-screen" : "flex h-screen"}>
       <div className={sidebarState ? "flex-1 p-4 flex items-start justify-center" : "w-md mx-auto p-4"}>
         <div className="w-md pt-5">
-          <button onClick={NotionPageRender} className="w-full mb-3 py-1 bg-[#4B3621] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#4B3621] hover:cursor-pointer">Refresh</button>
+          <button onClick={NotionPageRender} className="w-full mb-3 py-1 bg-[#53361F] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#53361F] hover:cursor-pointer">Refresh</button>
           {/* <button onClick={NotionPageRender} className="w-full mb-3 py-1 bg-[#4B3621] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#4B3621] hover:cursor-pointer">Fetch Page</button> */}
 
 
@@ -69,7 +69,7 @@ function App() {
             
             <h1 className="text-5xl font-bold mb-5">{message}</h1>
             {/* <p className="py-2">{pageID}</p> */}
-            <div className={`${NeedToReview ? 'bg-[#332523]' : 'bg-[#242B26]'} rounded inline-block pb-1`}>      
+            <div className={`${NeedToReview ? 'bg-[#5e1f15]' : 'bg-[#10381c]'} rounded inline-block pb-1`}>      
               <p className="text-white px-4">{NeedToReview ? 'Needs Review' : 'No Need For Review'}</p>
             </div>
             

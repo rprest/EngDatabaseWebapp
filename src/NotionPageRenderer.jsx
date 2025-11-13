@@ -14,7 +14,7 @@ const NotionPageRenderer = ({ blocks }) => {
 
             case 'paragraph':
                 return (
-                    <div key={id} className="text-left">
+                    <div key={id} className="">
                         <p>
                             {renderRichText(value.rich_text)}
                         </p>
@@ -23,7 +23,7 @@ const NotionPageRenderer = ({ blocks }) => {
 
             case 'heading_1':
                 return (
-                    <div key={id} className="text-left">
+                    <div key={id} className="text-xl font-bold">
                         <h1>
                             {renderRichText(value.rich_text)}
                         </h1>
@@ -32,7 +32,7 @@ const NotionPageRenderer = ({ blocks }) => {
 
             case 'heading_2':
                 return (
-                    <div key={id} className="text-left">
+                    <div key={id} className="text-2xl font-bold">
                         <h2>
                             {renderRichText(value.rich_text)}
                         </h2>
@@ -41,7 +41,7 @@ const NotionPageRenderer = ({ blocks }) => {
 
             case 'heading_3':
                 return (
-                    <div key={id} className="text-left">
+                    <div key={id} className="text-3xl font-bold">
                         <h3>
                             {renderRichText(value.rich_text)}
                         </h3>
@@ -169,7 +169,7 @@ const NotionPageRenderer = ({ blocks }) => {
     const groupedBlocks = groupBlocks(blocks);
 
     return (
-    <div className="max-w-4xl mx-auto px-8 py-8 text-gray-200 leading-relaxed">
+    <div className="max-w-4xl mx-auto px-8 py-8 text-gray-100 leading-relaxed text-left">
       {groupedBlocks.map((item, idx) => {
         if (item.type === 'bulleted') {
           return (
