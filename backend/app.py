@@ -4,12 +4,13 @@ from notion_client import Client
 import requests
 import os
 
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 
-# load_dotenv()
+load_dotenv()
 
 NOTION_API_KEY = os.environ.get("NOTION_API_KEY")
 DATASOURCE_ID = os.environ.get("DATASOURCE_ID")
+NOTION_VERSION = "2025-09-03"
 
 # print(NOTION_API_KEY)
 # print(DATASOURCE_ID)
@@ -31,6 +32,38 @@ CORS(
 @app.route("/")
 def health():
     return jsonify({"status": "healthy"})
+
+
+@app.route("/api/notion/blocks/<pageID>")
+def get_blocks(pageID):
+    def fetch_blocks_recursive(block_id):
+
+        url = f"https://api.notion.com/v1/blocks/{block_id}/children"
+
+        headers = {
+            "Authorization": f"Bearer {NOTION_API_KEY}",
+            "Notion-Version": NOTION_VERSION,
+        }
+
+        response = requests.get(url, headers=headers)
+        data = response.json()
+
+        if "results" not in data:
+            return []
+
+        blocks = data["results"]
+
+        for block in blocks:
+            if block.get("has_children", False):
+                block["children"] = fetch_blocks_recursive(block["id"])
+
+        return blocks
+
+    blocks = fetch_blocks_recursive(pageID)
+
+    print(blocks)
+
+    return jsonify({"results": blocks})
 
 
 @app.route("/api/recentpage")
@@ -64,15 +97,15 @@ def recentpage():
         else:
             title = "None Found"
 
-        if checkbox_properties:
-            print(checkbox_properties)
+        # if checkbox_properties:
+        #     print(checkbox_properties)
 
         page_id = page["id"]
 
         page_id_clean = page_id.replace("-", "")
         page_url = f"https://notion.so/{page_id_clean}"
 
-        print(checkbox_properties)
+        # print(checkbox_properties)
 
         return jsonify(
             {

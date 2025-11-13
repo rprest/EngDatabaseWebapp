@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import NotionPageRenderer from './NotionPageRenderer'
 
 function App() {
   const [count, setCount] = useState(0);
@@ -9,6 +10,14 @@ function App() {
   const [pageIDclean, setPageID_clean] = useState('');
   const [NeedToReview, setNeedToReview] = useState(false);
   const [sidebarState, setSidebarState] = useState(false);
+  const [notionBlocks, setNotionBlocks] = useState([]);
+
+  const NotionPageRender = async () => {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/notion/blocks/${pageIDclean}`);
+    const data = await response.json();
+    // console.log(data);
+    setNotionBlocks(data.results);
+  }
 
   const fetchRecentPage = async () => {
     const response = await fetch(`${import.meta.env.VITE_API_URL}/api/recentpage`);
@@ -23,27 +32,44 @@ function App() {
   useEffect(() => {
     fetchRecentPage();
     const interval = setInterval(fetchRecentPage, 5000);
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [])
+
+  useEffect(() => {
+    if (pageIDclean) {
+      NotionPageRender();
+    }
+  }, [pageIDclean])
+
+  useEffect(() => {
+    const Renderinterval = setInterval(NotionPageRender, 5000);
+    return () => {
+      clearInterval(Renderinterval);
+    };
   }, [])
 
   return (
     <div className={sidebarState ? "flex h-screen" : "flex h-screen"}>
       <div className={sidebarState ? "flex-1 p-4 flex items-start justify-center" : "w-md mx-auto p-4"}>
         <div className="w-md pt-5">
-          <button onClick={fetchRecentPage} className="w-full mb-3 py-1 bg-[#53361F] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#53361F] hover:cursor-pointer">Refresh</button>
+          <button onClick={fetchRecentPage} className="w-full mb-3 py-1 bg-[#4B3621] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#4B3621] hover:cursor-pointer">Refresh</button>
+          {/* <button onClick={NotionPageRender} className="w-full mb-3 py-1 bg-[#4B3621] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#4B3621] hover:cursor-pointer">Fetch Page</button> */}
+
 
           <button
             onClick={() => setSidebarState(!sidebarState)}
             className="w-full mb-3 py-1 bg-[#53361F] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#53361F] hover:cursor-pointer"
             >
-              {sidebarState ? 'Close Sideview test' : 'Open Sideview'}
+              {sidebarState ? 'Close Sideview' : 'Open Sideview'}
             </button>
 
           <a href={pageURL} target="_blank" className="block px-5 bg-[#233850] text-white rounded-xl p-3 hover:shadow-lg/40 shadow-[#233850] text-left hover:cursor-pointer no-underline">
             
             <h1 className="text-5xl font-bold">{message}</h1>
             <p className="py-2">{pageID}</p>
-            <div className={`${NeedToReview ? 'bg-red-900' : 'bg-green-900'} rounded inline-block`}>      
+            <div className={`${NeedToReview ? 'bg-[#332523]' : 'bg-[#242B26]'} rounded inline-block pb-1`}>      
               <p className="text-white px-4">{NeedToReview ? 'Needs Review' : 'No Need For Review'}</p>
             </div>
             
@@ -51,13 +77,21 @@ function App() {
         </div>
       </div>
 
-      <div 
-        className={`bg-[#191919] p-4 border-l-4 border-neutral-300 shadow-xl/70 shadow-white transition-all duration-300 ease-in-out ${
-          sidebarState ? 'w-1/2' : 'w-0 p-0 border-0 overflow-hidden'
+      <div
+        className={`bg-[#191919] border-l-4 border-neutral-300 shadow-xl/70 shadow-white transition-all duration-300 ease-in-out overflow-y-auto ${
+          sidebarState ? 'w-1/2 p-4' : 'w-0 p-0 border-0 overflow-hidden'
         }`}
       >
-        <div className={`${sidebarState ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300 h-full`}>
-          <iframe src={`https://working-ethernet-639.notion.site/ebd/${pageIDclean}`} frameborder="0" loading="lazy" className="w-full h-full"  />
+        <div className={`${sidebarState ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}>
+
+          {notionBlocks.length > 0 ? (
+            <NotionPageRenderer blocks={notionBlocks} />
+          ) : (
+            <div className="text-white">Click Here</div>
+          
+          )}
+
+          {/* <iframe src={`https://working-ethernet-639.notion.site/ebd/${pageIDclean}`} frameborder="0" loading="lazy" className="w-full h-full"  /> */}
         </div>
       </div>
 
