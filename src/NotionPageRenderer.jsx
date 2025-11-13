@@ -14,7 +14,7 @@ const NotionPageRenderer = ({ blocks }) => {
 
             case 'paragraph':
                 return (
-                    <div key={id}>
+                    <div key={id} className="text-left">
                         <p>
                             {renderRichText(value.rich_text)}
                         </p>
@@ -23,7 +23,7 @@ const NotionPageRenderer = ({ blocks }) => {
 
             case 'heading_1':
                 return (
-                    <div key={id}>
+                    <div key={id} className="text-left">
                         <h1>
                             {renderRichText(value.rich_text)}
                         </h1>
@@ -32,7 +32,7 @@ const NotionPageRenderer = ({ blocks }) => {
 
             case 'heading_2':
                 return (
-                    <div key={id}>
+                    <div key={id} className="text-left">
                         <h2>
                             {renderRichText(value.rich_text)}
                         </h2>
@@ -41,7 +41,7 @@ const NotionPageRenderer = ({ blocks }) => {
 
             case 'heading_3':
                 return (
-                    <div key={id}>
+                    <div key={id} className="text-left">
                         <h3>
                             {renderRichText(value.rich_text)}
                         </h3>
