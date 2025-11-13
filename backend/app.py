@@ -61,7 +61,7 @@ def get_blocks(pageID):
 
     blocks = fetch_blocks_recursive(pageID)
 
-    print(blocks)
+    # print(blocks)
 
     return jsonify({"results": blocks})
 
