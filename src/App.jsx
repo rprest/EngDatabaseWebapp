@@ -54,7 +54,7 @@ function App() {
     <div className={sidebarState ? "flex h-screen" : "flex h-screen"}>
       <div className={sidebarState ? "flex-1 p-4 flex items-start justify-center" : "w-md mx-auto p-4"}>
         <div className="w-md pt-5">
-          <button onClick={fetchRecentPage} className="w-full mb-3 py-1 bg-[#4B3621] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#4B3621] hover:cursor-pointer">Refresh</button>
+          <button onClick={NotionPageRender} className="w-full mb-3 py-1 bg-[#4B3621] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#4B3621] hover:cursor-pointer">Refresh</button>
           {/* <button onClick={NotionPageRender} className="w-full mb-3 py-1 bg-[#4B3621] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#4B3621] hover:cursor-pointer">Fetch Page</button> */}
 
 
@@ -68,7 +68,7 @@ function App() {
           <a href={pageURL} target="_blank" className="block px-5 bg-[#233850] text-white rounded-xl p-3 hover:shadow-lg/40 shadow-[#233850] text-left hover:cursor-pointer no-underline">
             
             <h1 className="text-5xl font-bold">{message}</h1>
-            <p className="py-2">{pageID}</p>
+            {/* <p className="py-2">{pageID}</p> */}
             <div className={`${NeedToReview ? 'bg-[#332523]' : 'bg-[#242B26]'} rounded inline-block pb-1`}>      
               <p className="text-white px-4">{NeedToReview ? 'Needs Review' : 'No Need For Review'}</p>
             </div>
@@ -78,7 +78,7 @@ function App() {
       </div>
 
       <div
-        className={`bg-[#191919] border-l-4 border-neutral-300 shadow-xl/70 shadow-white transition-all duration-300 ease-in-out overflow-y-auto ${
+        className={`bg-[#191919] border-l-4 border-neutral-300 transition-all duration-300 ease-in-out overflow-y-auto ${
           sidebarState ? 'w-1/2 p-4' : 'w-0 p-0 border-0 overflow-hidden'
         }`}
       >
