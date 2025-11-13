@@ -36,7 +36,7 @@ function App() {
             onClick={() => setSidebarState(!sidebarState)}
             className="w-full mb-3 py-1 bg-[#53361F] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#53361F] hover:cursor-pointer"
             >
-              {sidebarState ? 'Close Sideview' : 'Open Sideview'}
+              {sidebarState ? 'Close Sideview test' : 'Open Sideview'}
             </button>
 
           <a href={pageURL} target="_blank" className="block px-5 bg-[#233850] text-white rounded-xl p-3 hover:shadow-lg/40 shadow-[#233850] text-left hover:cursor-pointer no-underline">
