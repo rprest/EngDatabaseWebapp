@@ -67,7 +67,7 @@ function App() {
 
           <a href={pageURL} target="_blank" className="block px-5 bg-[#233850] text-white rounded-xl p-3 hover:shadow-lg/40 shadow-[#233850] text-left hover:cursor-pointer no-underline">
             
-            <h1 className="text-5xl font-bold">{message}</h1>
+            <h1 className="text-5xl font-bold mb-5">{message}</h1>
             {/* <p className="py-2">{pageID}</p> */}
             <div className={`${NeedToReview ? 'bg-[#332523]' : 'bg-[#242B26]'} rounded inline-block pb-1`}>      
               <p className="text-white px-4">{NeedToReview ? 'Needs Review' : 'No Need For Review'}</p>
