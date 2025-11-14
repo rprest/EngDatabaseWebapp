@@ -90,9 +90,14 @@ function App() {
             
           </a>
 
-          <p>{relationProperty}</p>
-          <p>{subitemIDs}</p>
-          <p>{subitemCount}</p>
+          <div className="text-white">
+
+            <p>{relationProperty}</p>
+            <p>{subitemIDs.join(', ')}</p>
+            <p>{subitemCount}</p>
+
+          </div>
+          
 
         </div>
       </div>
