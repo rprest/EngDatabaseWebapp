@@ -12,11 +12,25 @@ function App() {
   const [sidebarState, setSidebarState] = useState(false);
   const [notionBlocks, setNotionBlocks] = useState([]);
 
+  const [relationProperty, setRelationProperty] = useState('');
+  const [subitemIDs, setSubitemIDs] = useState('');
+  const [subitemCount, setSubitemCount] = useState('');
+
+
+
   const NotionPageRender = async () => {
     const response = await fetch(`${import.meta.env.VITE_API_URL}/api/notion/blocks/${pageIDclean}`);
     const data = await response.json();
     // console.log(data);
     setNotionBlocks(data.results);
+  }
+
+  const fetchSubitems = async () => {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/notion/subitems/${pageIDclean}`);
+    const data = await response.json();
+    setRelationProperty(data.relation_property);
+    setSubitemIDs(data.subitem_ids);
+    setSubitemCount(data.subitem_count);
   }
 
   const fetchRecentPage = async () => {
@@ -55,7 +69,7 @@ function App() {
       <div className={sidebarState ? "flex-1 p-4 flex items-start justify-center" : "w-md mx-auto p-4"}>
         <div className="w-md pt-5">
           <button onClick={NotionPageRender} className="w-full mb-3 py-1 bg-[#53361F] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#53361F] hover:cursor-pointer">Refresh</button>
-          {/* <button onClick={NotionPageRender} className="w-full mb-3 py-1 bg-[#4B3621] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#4B3621] hover:cursor-pointer">Fetch Page</button> */}
+          <button onClick={fetchSubitems} className="w-full mb-3 py-1 bg-[#4B3621] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#4B3621] hover:cursor-pointer">Fetch Subitems</button>
 
 
           <button
@@ -74,6 +88,11 @@ function App() {
             </div>
             
           </a>
+
+          <p>{relationProperty}</p>
+          <p>{subitemIDs}</p>
+          <p>{subitemCount}</p>
+
         </div>
       </div>
 

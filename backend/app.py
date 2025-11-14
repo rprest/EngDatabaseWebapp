@@ -66,6 +66,42 @@ def get_blocks(pageID):
     return jsonify({"results": blocks})
 
 
+@app.route("/api/notion/subitems/<pageID>")
+def get_subitems(pageID):
+
+    try:
+        notion = Client(auth=NOTION_API_KEY)
+
+        page = notion.pages.retrieve(page_id=pageID)
+
+        relation_property_name = None
+        related_pages = []
+
+        for prop_name, prop_value in page["properties"].items():
+            if prop_value["type"] == "relation":
+
+                if "sub item" in prop_name.lower() or "subitem" in prop_name.lower():
+                    relation_property_name = prop_name
+                    related_pages = prop_value["relation"]
+                    break
+
+        if not relation_property_name:
+            return jsonify({"error": "No subitem prop found", "subitems": []})
+
+        subitem_ids = [item["id"] for item in related_pages]
+
+        return jsonify(
+            {
+                "relation_property": relation_property_name,
+                "subitem_ids": subitem_ids,
+                "subitem_count": len(subitem_ids),
+            }
+        )
+
+    except Exception as e:
+        return jsonify({"error": str(e), "subitems": []}), 500
+
+
 @app.route("/api/recentpage")
 def recentpage():
 
