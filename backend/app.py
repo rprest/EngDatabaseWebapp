@@ -21,7 +21,11 @@ CORS(
     app,
     resources={
         r"/api/*": {
-            "origins": ["http://localhost:5173", "https://rprest.github.io"],
+            "origins": [
+                "http://localhost:5173",
+                "https://rprest.github.io",
+                "https://rprest.github.io/EngDatabaseWebapp",
+            ],
             "methods": ["GET", "POST", "OPTIONS"],
             "allow_headers": ["Content-Type"],
         }
