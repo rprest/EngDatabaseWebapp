@@ -58,7 +58,12 @@ function App() {
   useEffect(() => {
     if (pageIDclean) {
       NotionPageRender();
-      // fetchSubitems();
+    }
+  }, [pageIDclean])
+
+  useEffect(() => {
+    if (pageIDclean) {
+      fetchSubitems();
     }
   }, [pageIDclean])
 
@@ -68,6 +73,15 @@ function App() {
     const Renderinterval = setInterval(NotionPageRender, 5000);
     return () => {
       clearInterval(Renderinterval);
+    };
+  }, [pageIDclean])
+
+  useEffect(() => {
+    if (!pageIDclean) return;
+
+    const fetchSubitemInterval = setInterval(fetchSubitems, 5000);
+    return () => {
+      clearInterval(fetchSubitemInterval);
     };
   }, [pageIDclean])
 
@@ -97,11 +111,24 @@ function App() {
           </a>
 
           <div className="text-white mt-3">
-
-            <p>{relationProperty}</p>
-            <p>{subitemIDs?.join(', ') || 'No subitems'}</p>
-            <p>{subitemCount}</p>
-
+            <p className="mb-2">{relationProperty}</p>
+            <p className="mb-2">Count: {subitemCount}</p>
+            
+            {subitemIDs && subitemIDs.length > 0 ? (
+              <div className="space-y-2">
+                {subitemIDs.map((subitemID, index) => (
+                  <div 
+                    key={subitemID} 
+                    className="bg-[#233850] rounded-xl p-3 hover:shadow-lg/40 shadow-[#233850]"
+                  >
+                    <p className="text-sm text-gray-400">Subitem {index + 1}</p>
+                    <p className="font-semibold">{subitemID}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p>No subitems</p>
+            )}
           </div>
           
 
