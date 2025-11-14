@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import './App.css'
 import NotionPageRenderer from './NotionPageRenderer'
 
@@ -18,16 +18,16 @@ function App() {
 
 
 
-  const NotionPageRender = async () => {
+  const NotionPageRender = useCallback(async () => {
     if (!pageIDclean) return;
 
     const response = await fetch(`${import.meta.env.VITE_API_URL}/api/notion/blocks/${pageIDclean}`);
     const data = await response.json();
     // console.log(data);
     setNotionBlocks(data.results);
-  }
+  }, [pageIDclean]);
 
-  const fetchSubitems = async () => {
+  const fetchSubitems = useCallback(async () => {
     if (!pageIDclean) return;
 
     const response = await fetch(`${import.meta.env.VITE_API_URL}/api/notion/subitems/${pageIDclean}`);
@@ -35,9 +35,9 @@ function App() {
     setRelationProperty(data.relation_property);
     setSubitemIDs(data.subitem_ids);
     setSubitemCount(data.subitem_count);
-  }
+  }, [pageIDclean]);
 
-  const fetchRecentPage = async () => {
+  const fetchRecentPage = useCallback(async () => {
     const response = await fetch(`${import.meta.env.VITE_API_URL}/api/recentpage`);
     const data = await response.json();
     setMessage(data.most_recent_title);
@@ -45,7 +45,7 @@ function App() {
     setPageURL(data.notion_url);
     setPageID_clean(data.page_id_clean);
     setNeedToReview(data.checkbox_properties["Need to Review"]);
-  };
+  }, []);
 
   useEffect(() => {
     fetchRecentPage();
@@ -53,7 +53,7 @@ function App() {
     return () => {
       clearInterval(interval);
     };
-  }, [])
+  }, [fetchRecentPage])
 
   useEffect(() => {
     if (pageIDclean) {
@@ -74,7 +74,7 @@ function App() {
     return () => {
       clearInterval(Renderinterval);
     };
-  }, [pageIDclean])
+  }, [pageIDclean, NotionPageRender])
 
   useEffect(() => {
     if (!pageIDclean) return;
@@ -83,7 +83,7 @@ function App() {
     return () => {
       clearInterval(fetchSubitemInterval);
     };
-  }, [pageIDclean])
+  }, [pageIDclean, fetchSubitems])
 
   return (
     <div className={sidebarState ? "flex h-screen" : "flex h-screen"}>
