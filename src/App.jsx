@@ -47,13 +47,13 @@ function App() {
     setNeedToReview(data.checkbox_properties["Need to Review"]);
   }, []);
 
-  // useEffect(() => {
-  //   fetchRecentPage();
-  //   const interval = setInterval(fetchRecentPage, 5000);
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // }, [fetchRecentPage])
+  useEffect(() => {
+    fetchRecentPage();
+    const interval = setInterval(fetchRecentPage, 5000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [fetchRecentPage])
 
   useEffect(() => {
     if (pageIDclean) {
@@ -71,7 +71,7 @@ function App() {
     if (!pageIDclean) return;
 
     const interval = setInterval(() => {
-      fetchRecentPage();
+      // fetchRecentPage();
       NotionPageRender();
       fetchSubitems();
     }, 5000);
