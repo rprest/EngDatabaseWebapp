@@ -70,20 +70,13 @@ function App() {
   useEffect(() => {
     if (!pageIDclean) return;
 
-    const Renderinterval = setInterval(NotionPageRender, 5000);
-    return () => {
-      clearInterval(Renderinterval);
-    };
-  }, [pageIDclean, NotionPageRender])
-
-  useEffect(() => {
-    if (!pageIDclean) return;
-
-    const fetchSubitemInterval = setInterval(fetchSubitems, 5000);
-    return () => {
-      clearInterval(fetchSubitemInterval);
-    };
-  }, [pageIDclean, fetchSubitems])
+    const interval = setInterval(() => {
+      NotionPageRender();
+      fetchSubitems();
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [pageIDclean, NotionPageRender, fetchSubitems])
 
   return (
     <div className={sidebarState ? "flex h-screen" : "flex h-screen"}>
