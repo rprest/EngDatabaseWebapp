@@ -3,6 +3,10 @@ import './App.css'
 import NotionPageRenderer from './NotionPageRenderer'
 
 function App() {
+
+  console.log('App component rendered');
+  console.log('VITE_API_URL:', import.meta.env.VITE_API_URL);
+
   const [count, setCount] = useState(0);
   const [message, setMessage] = useState('Page Title');
   const [pageID, setPageID] = useState('Page ID');
