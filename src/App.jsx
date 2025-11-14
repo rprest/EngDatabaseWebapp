@@ -13,8 +13,8 @@ function App() {
   const [notionBlocks, setNotionBlocks] = useState([]);
 
   const [relationProperty, setRelationProperty] = useState('');
-  const [subitemIDs, setSubitemIDs] = useState('');
-  const [subitemCount, setSubitemCount] = useState('');
+  const [subitemIDs, setSubitemIDs] = useState([]);
+  const [subitemCount, setSubitemCount] = useState(0);
 
 
 
@@ -54,6 +54,7 @@ function App() {
   useEffect(() => {
     if (pageIDclean) {
       NotionPageRender();
+      fetchSubitems();
     }
   }, [pageIDclean])
 
