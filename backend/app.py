@@ -80,7 +80,7 @@ def get_subitems(pageID):
         for prop_name, prop_value in page["properties"].items():
             if prop_value["type"] == "relation":
 
-                if "sub item" in prop_name.lower() or "subitem" in prop_name.lower():
+                if prop_name.lower() == "sub-item":
                     relation_property_name = prop_name
                     related_pages = prop_value["relation"]
                     break
@@ -117,6 +117,8 @@ def recentpage():
 
     if response["results"]:
         page = response["results"][0]
+
+        # print(page)
 
         title_prop = None
         checkbox_properties = {}

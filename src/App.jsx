@@ -76,7 +76,7 @@ function App() {
       <div className={sidebarState ? "flex-1 p-4 flex items-start justify-center" : "w-md mx-auto p-4"}>
         <div className="w-md pt-5">
           <button onClick={NotionPageRender} className="w-full mb-3 py-1 bg-[#53361F] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#53361F] hover:cursor-pointer">Refresh</button>
-          <button onClick={fetchSubitems} className="w-full mb-3 py-1 bg-[#4B3621] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#4B3621] hover:cursor-pointer">Fetch Subitems</button>
+          <button onClick={fetchSubitems} className="w-full mb-3 py-1 bg-[#53361F] text-white rounded-xl px-2 hover:shadow-md/40 shadow-[#53361F] hover:cursor-pointer">Fetch Subitems</button>
 
 
           <button
@@ -96,10 +96,10 @@ function App() {
             
           </a>
 
-          <div className="text-white">
+          <div className="text-white mt-3">
 
             <p>{relationProperty}</p>
-            <p>{subitemIDs.join(', ')}</p>
+            <p>{subitemIDs?.join(', ') || 'No subitems'}</p>
             <p>{subitemCount}</p>
 
           </div>
