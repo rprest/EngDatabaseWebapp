@@ -19,6 +19,8 @@ function App() {
 
 
   const NotionPageRender = async () => {
+    if (!pageIDclean) return;
+
     const response = await fetch(`${import.meta.env.VITE_API_URL}/api/notion/blocks/${pageIDclean}`);
     const data = await response.json();
     // console.log(data);
@@ -26,6 +28,8 @@ function App() {
   }
 
   const fetchSubitems = async () => {
+    if (!pageIDclean) return;
+
     const response = await fetch(`${import.meta.env.VITE_API_URL}/api/notion/subitems/${pageIDclean}`);
     const data = await response.json();
     setRelationProperty(data.relation_property);
@@ -54,16 +58,18 @@ function App() {
   useEffect(() => {
     if (pageIDclean) {
       NotionPageRender();
-      fetchSubitems();
+      // fetchSubitems();
     }
   }, [pageIDclean])
 
   useEffect(() => {
+    if (!pageIDclean) return;
+
     const Renderinterval = setInterval(NotionPageRender, 5000);
     return () => {
       clearInterval(Renderinterval);
     };
-  }, [])
+  }, [pageIDclean])
 
   return (
     <div className={sidebarState ? "flex h-screen" : "flex h-screen"}>
