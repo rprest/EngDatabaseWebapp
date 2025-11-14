@@ -74,7 +74,7 @@ function App() {
       fetchRecentPage();
       NotionPageRender();
       fetchSubitems();
-    }, 20000);
+    }, 5000);
     
     return () => clearInterval(interval);
   }, [pageIDclean, NotionPageRender, fetchSubitems])
